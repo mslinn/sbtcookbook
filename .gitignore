@@ -1,0 +1,8 @@
+.cache
+boot
+project/project
+target
+/.idea
+/.idea_modules
+lib
+*~
