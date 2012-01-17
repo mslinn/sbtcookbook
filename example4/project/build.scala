@@ -5,7 +5,7 @@ import sbt._
 import sbt.Keys._
 
 object MyBuild extends Build {
-  val template = """object Properties { +
+  val template = """object Properties {
     def name = "{name}"
   }"""
   def generatePropertiesFile(dir: File, name: String) = {
@@ -20,6 +20,6 @@ object MyBuild extends Build {
   [error]   val awesomez = Project("scala-awesomez", file(".")) settings(inConfig(Compile)(  */
   val awesomez = Project("scala-awesomez", file(".")) settings(inConfig(Compile)(
     sourceGenerators <+= (sourceManaged, name) map generatePropertiesFile
-  ))
+  ):_*)
 }
 
