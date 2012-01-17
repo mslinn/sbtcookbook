@@ -15,13 +15,11 @@ object MyBuild extends Build {
     zip
   }
 
-  inConfig(distConfig)(Seq(
-  /* [error] No implicit for Append.Value[Seq[(java.io.File, String)], sbt.Project.Initialize[sbt.Task[(java.io.File, java.lang.String)]]] found,
-  [error]   so sbt.Project.Initialize[sbt.Task[(java.io.File, java.lang.String)]] cannot be appended to Seq[(java.io.File, String)] */
+  val awesomez = Project("scala-awesomez", file(".")) settings(inConfig(distConfig)(Seq(
     mappings := Seq.empty,
-    mappings += (packageBin in Compile) map (_ -> "main.jar"),
-    mappings += (packageDoc in compile) map (_ -> "docs.jar"),
+    mappings <+= (packageBin in Compile) map (_ -> "main.jar"),
+    mappings <+= (packageDoc in Compile) map (_ -> "docs.jar"),
     packageBin <<= (mappings, baseDirectory) map makeZipDist
-  ))
+  )):_*)
 }
 
