@@ -12,8 +12,9 @@ object HelloBuild extends Build {
   val loc = TaskKey[Unit]("loc", "Displays the number of lines of code in the project")
 
   val locTask = loc := {
-	set TaskKey[Unit]("k") <<= (sources in Compile) map (s => println(s.last.getName))
-    set TaskKey[Unit]("l") <<= (sources in Compile) map (s => s.last.getAbsolutePath)
+    // need to learn how to read a file so this next line can print the number of lines
+    println((sources in Compile) map (s => s.last.getAbsolutePath).readFileSomehow.lines.map(_.length).sum)
+	//set TaskKey[Unit]("k") <<= (sources in Compile) map (s => println(s.last.getName))
     //println("This project has " + sourceFiles.length + " files containing source code")
   }
 
