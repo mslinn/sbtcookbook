@@ -11,6 +11,20 @@ object HelloBuild extends Build {
 
   val loc = TaskKey[Unit]("loc", "Displays the number of lines of code in the project")
 
+/* Thanks Josh! Will get back to this in a couple of days
+def line_count(file: File): Long =  IO.readLines(file).length   // NOTE: Horribly inefficient and doesn't ignore comments.
+
+    def sources_line_count(file: Seq[File]): Long = 
+      if(files.empty) 0
+      else  file.par.map(line_count).reduce(_+_)
+
+     val locTask = lock <<= (sources in Compile) map sources_line_count
+
+
+then in SBT type:
+
+     show loc*/
+
   val locTask = loc := {
     // need to learn how to read a file so this next line can print the number of lines
     println((sources in Compile) map (s => s.last.getAbsolutePath).readFileSomehow.lines.map(_.length).sum)
